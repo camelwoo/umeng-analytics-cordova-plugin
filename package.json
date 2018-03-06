@@ -1,0 +1,19 @@
+{
+  "name": "umeng-analytics-cordova-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "umeng-analytics-cordova-plugin",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "wux",
+  "license": "MIT"
+}

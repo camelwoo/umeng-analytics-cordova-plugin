@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="umeng-analytics-cordova-plugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>Umeng Analytics Plugin</name>
+	<description>Umeng Analytics Plugin</description>
+	<license>MIT</license>
+	<keywords>umeng</keywords>
+	<repo>https://github.com/camelwoo/umeng-analytics-cordova-plugin.git</repo>
+	<issue>https://github.com/camelwoo/umeng-analytics-cordova-plugin/issues</issue>
+
+	<preference name="APP_KEY" />
+
+	<js-module name="umeng-analytics-cordova-plugin" src="www/analyticssdk.js">
+		<clobbers target="UmAnalytics" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="AnalyticsSDK">
+				<param name="android-package" value="com.umeng.plugin.AnalyticsSDK" />
+			</feature>
+		</config-file>
+
+		<preference name="CHANNEL" />
+
+		<source-file src="src/android/com/umeng/plugin/PGCommonSDK.java" target-dir="src/com/umeng/plugin/" />
+		<source-file src="src/android/com/umeng/plugin/AnalyticsSDK.java" target-dir="src/com/umeng/plugin/" />
+		<source-file src="src/android/umeng-common-1.4.1.jar" target-dir="libs" />
+		<source-file src="src/android/umeng-analytics-7.4.1.jar" target-dir="libs" />
+
+		<config-file target="AndroidManifest.xml"  parent="application">
+			<!-- appkey -->
+			<meta-data android:name="UMENG_APPKEY" android:value="$APP_KEY" />
+			<meta-data android:name="UMENG_CHANNEL" android:value="$CHANNEL"/>
+		</config-file>        
+		<config-file target="AndroidManifest.xml"  parent="/manifest">
+			<!-- 必须的权限 -->
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<!-- 推荐的权限 -->
+			<!-- 添加如下权限，以便使用更多的第三方SDK和更精准的统计数据 -->
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		</config-file>
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="AnalyticsSDK">
+				<param name="ios-package" value="UMAnalyticsModule" />
+			</feature>
+		</config-file>
+
+		<source-file src="src/ios/UMAnalytics.framework" framework="true" />
+		<source-file src="src/ios/UMCommon.framework" framework="true" />
+
+		<header-file src="src/ios/UMCommonModule.h" />
+		<source-file src="src/ios/UMCommonModule.m" />
+		<header-file src="src/ios/UMAnalyticsModule.h" />
+		<source-file src="src/ios/UMAnalyticsModule.m" />
+
+		<framework src="CoreTelephony.framework" />
+		<framework src="libsqlite3.tbd"/>
+		<framework src="libz.tbd"/>
+	</platform>
+</plugin>

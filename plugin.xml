@@ -52,9 +52,6 @@
 			</feature>
 		</config-file>
 
-		<source-file src="src/ios/UMAnalytics.framework" framework="true" />
-		<source-file src="src/ios/UMCommon.framework" framework="true" />
-
 		<header-file src="src/ios/UMCommonModule.h" />
 		<source-file src="src/ios/UMCommonModule.m" />
 		<header-file src="src/ios/UMAnalyticsModule.h" />
@@ -63,5 +60,8 @@
 		<framework src="CoreTelephony.framework" />
 		<framework src="libsqlite3.tbd"/>
 		<framework src="libz.tbd"/>
+
+		<framework src="src/ios/UMAnalytics.framework" custom="true" />
+		<framework src="src/ios/UMCommon.framework" custom="true" />
 	</platform>
 </plugin>

@@ -5,6 +5,10 @@
 
 **工作环境中慎用**
 
+**安装**
+
+cordova plugin add https://github.com/camelwoo/umeng-analytics-cordova-plugin --variable APP_KEY=友盟KEY --variable CHANNEL=渠道名
+
 其它说明：
 
 * 参考了 [Ql_Umeng](https://github.com/Bjkb/Ql_Umeng) 插件。

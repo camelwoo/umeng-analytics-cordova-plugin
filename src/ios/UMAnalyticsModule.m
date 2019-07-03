@@ -8,7 +8,8 @@
 #import "UMAnalyticsModule.h"
 #import <UMAnalytics/MobClick.h>
 #import <UMAnalytics/MobClickGameAnalytics.h>
-#import <UMAnalytics/DplusMobClick.h>
+//#import <UMAnalytics/DplusMobClick.h>
+#import "UMCommonModule.h"
 
 
 @interface UMAnalyticsModule ()
@@ -32,6 +33,20 @@
 
 
 
+
+- (void)init:(CDVInvokedUrlCommand*)command {
+    NSString *appkey = [command.arguments objectAtIndex:0];
+    NSString *channel = [command.arguments objectAtIndex:1];
+    if (appkey == nil || [appkey isKindOfClass:[NSNull class]] || channel == nil || [channel isKindOfClass:[NSNull class]]) {
+        return;
+    }
+    [UMCommonModule initWithAppkey:appkey channel:channel];
+}
+
+- (void)setLogEnabled:(CDVInvokedUrlCommand*)command {
+    BOOL enabled = [command.arguments objectAtIndex:0];
+    [UMConfigure setLogEnabled:enabled];
+}
 
 - (void)onEvent:(CDVInvokedUrlCommand*)command {
     NSString *eventId = [command.arguments objectAtIndex:0];
@@ -318,7 +333,7 @@
     if (eventName == nil || [eventName isKindOfClass:[NSNull class]]) {
         return;
     }
-    [DplusMobClick track:eventName];
+//    [DplusMobClick track:eventName];
 }
 
 - (void)trackWithProperty:(CDVInvokedUrlCommand*)command {
@@ -327,12 +342,12 @@
         return;
     }
     NSDictionary *property = [command.arguments objectAtIndex:1];
-    [DplusMobClick track:eventName property:property];
+//    [DplusMobClick track:eventName property:property];
 }
 
 - (void)registerSuperProperty:(CDVInvokedUrlCommand*)command {
     NSDictionary *property = [command.arguments objectAtIndex:0];
-    [DplusMobClick registerSuperProperty:property];
+//    [DplusMobClick registerSuperProperty:property];
 }
 
 - (void)unregisterSuperProperty:(CDVInvokedUrlCommand*)command {
@@ -340,14 +355,14 @@
     if (propertyName == nil || [propertyName isKindOfClass:[NSNull class]]) {
         return;
     }
-    [DplusMobClick unregisterSuperProperty:propertyName];
+//    [DplusMobClick unregisterSuperProperty:propertyName];
 }
 
 - (void)getSuperProperty:(CDVInvokedUrlCommand*)command {
     NSString *propertyName = [command.arguments objectAtIndex:0];
     
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[DplusMobClick getSuperProperty:propertyName]];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+//    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[DplusMobClick getSuperProperty:propertyName]];
+//    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     
     
 }
@@ -356,29 +371,29 @@
     
     NSString *jsonString = nil;
     NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[DplusMobClick getSuperProperties]
-                                                       options:kNilOptions //TODO: NSJSONWritingPrettyPrinted  // kNilOptions
-                                                         error:&error];
-    if ([jsonData length] && (error == nil))
-    {
-        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ;
-    }else{
-        jsonString=@"";
-    }
-    NSString *callBack = [NSString stringWithFormat:@"getSuperProperties('%@')",jsonString];
-    
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:callBack];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[DplusMobClick getSuperProperties]
+//                                                       options:kNilOptions //TODO: NSJSONWritingPrettyPrinted  // kNilOptions
+//                                                         error:&error];
+//    if ([jsonData length] && (error == nil))
+//    {
+//        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ;
+//    }else{
+//        jsonString=@"";
+//    }
+//    NSString *callBack = [NSString stringWithFormat:@"getSuperProperties('%@')",jsonString];
+//
+//    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:callBack];
+//    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     
 }
 
 - (void)clearSuperProperties:(CDVInvokedUrlCommand*)commands {
-    [DplusMobClick clearSuperProperties];
+//    [DplusMobClick clearSuperProperties];
 }
 
 - (void)setFirstLaunchEvent:(CDVInvokedUrlCommand*)command {
     NSArray *eventList = [command.arguments objectAtIndex:0];
-    [DplusMobClick setFirstLaunchEvent:eventList];
+//    [DplusMobClick setFirstLaunchEvent:eventList];
 }
 
 @end

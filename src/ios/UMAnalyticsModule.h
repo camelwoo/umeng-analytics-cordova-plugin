@@ -12,6 +12,8 @@
 @interface UMAnalyticsModule : CDVPlugin
 
 
+- (void)init:(CDVInvokedUrlCommand*)command;
+- (void)setLogEnabled:(CDVInvokedUrlCommand*)command;
 - (void)onEvent:(CDVInvokedUrlCommand*)command;
 - (void)onEventWithLabel:(CDVInvokedUrlCommand*)command;
 - (void)onEventWithParameters:(CDVInvokedUrlCommand*)command;
